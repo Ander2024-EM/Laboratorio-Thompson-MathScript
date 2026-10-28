@@ -1,0 +1,13 @@
+referencias/
+.backup/
+node_modules/
+dist/
+.visual-profile/
+.edge-visual/
+.tools/
+*.log
+Thumbs.db
+.DS_Store
+.env
+.env.local
+.env.*

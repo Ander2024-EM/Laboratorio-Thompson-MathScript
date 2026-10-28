@@ -1,0 +1,685 @@
+{
+  "schema": "laboratorio-thompson-mathscript/modelos-v1",
+  "source": "Capitulo_3_Construccion_AFND_Lambda_Thompson.docx",
+  "alphabet": "Σ = ASCII imprimibles (32..126) ∪ {TAB, CR, LF}",
+  "warnings": [
+    "TOKEN_STRING es extensión pendiente de confirmar con el docente",
+    "TOKEN_OP y TOKEN_DELIM tienen diagramas compactos; la demostración de unión por Thompson debe mostrarse como ilustración aparte",
+    "No es un intérprete ni ejecuta el código fuente",
+    "Las reservas también son TOKEN_ID en el autómata individual; el reconocimiento unificado resuelve prioridad"
+  ],
+  "models": [
+    {
+      "id": "var",
+      "section": "3.1",
+      "name": "TOKEN_VAR",
+      "start": "q0",
+      "finals": [
+        "q5"
+      ],
+      "regex": "v · a · r",
+      "edges": [
+        {
+          "from_state": "q0",
+          "to_state": "q1",
+          "symbol": "v"
+        },
+        {
+          "from_state": "q1",
+          "to_state": "q2",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q2",
+          "to_state": "q3",
+          "symbol": "a"
+        },
+        {
+          "from_state": "q3",
+          "to_state": "q4",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q4",
+          "to_state": "q5",
+          "symbol": "r"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "var"
+        ],
+        "reject": [
+          "va",
+          "Var",
+          "variable"
+        ]
+      },
+      "explanation": "Concatenación literal, no aceptar prefijos parciales."
+    },
+    {
+      "id": "print",
+      "section": "3.2",
+      "name": "TOKEN_PRINT",
+      "start": "q6",
+      "finals": [
+        "q15"
+      ],
+      "regex": "p · r · i · n · t",
+      "edges": [
+        {
+          "from_state": "q6",
+          "to_state": "q7",
+          "symbol": "p"
+        },
+        {
+          "from_state": "q7",
+          "to_state": "q8",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q8",
+          "to_state": "q9",
+          "symbol": "r"
+        },
+        {
+          "from_state": "q9",
+          "to_state": "q10",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q10",
+          "to_state": "q11",
+          "symbol": "i"
+        },
+        {
+          "from_state": "q11",
+          "to_state": "q12",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q12",
+          "to_state": "q13",
+          "symbol": "n"
+        },
+        {
+          "from_state": "q13",
+          "to_state": "q14",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q14",
+          "to_state": "q15",
+          "symbol": "t"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "print"
+        ],
+        "reject": [
+          "prin",
+          "Print",
+          "printer"
+        ]
+      },
+      "explanation": "Cinco literales obligatorios."
+    },
+    {
+      "id": "if",
+      "section": "3.3",
+      "name": "TOKEN_IF",
+      "start": "q16",
+      "finals": [
+        "q19"
+      ],
+      "regex": "i · f",
+      "edges": [
+        {
+          "from_state": "q16",
+          "to_state": "q17",
+          "symbol": "i"
+        },
+        {
+          "from_state": "q17",
+          "to_state": "q18",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q18",
+          "to_state": "q19",
+          "symbol": "f"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "if"
+        ],
+        "reject": [
+          "i",
+          "iff",
+          "If"
+        ]
+      },
+      "explanation": "Dos símbolos concatenados."
+    },
+    {
+      "id": "else",
+      "section": "3.4",
+      "name": "TOKEN_ELSE",
+      "start": "q20",
+      "finals": [
+        "q27"
+      ],
+      "regex": "e · l · s · e",
+      "edges": [
+        {
+          "from_state": "q20",
+          "to_state": "q21",
+          "symbol": "e"
+        },
+        {
+          "from_state": "q21",
+          "to_state": "q22",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q22",
+          "to_state": "q23",
+          "symbol": "l"
+        },
+        {
+          "from_state": "q23",
+          "to_state": "q24",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q24",
+          "to_state": "q25",
+          "symbol": "s"
+        },
+        {
+          "from_state": "q25",
+          "to_state": "q26",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q26",
+          "to_state": "q27",
+          "symbol": "e"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "else"
+        ],
+        "reject": [
+          "els",
+          "Else",
+          "elses"
+        ]
+      },
+      "explanation": "Cuatro símbolos concatenados."
+    },
+    {
+      "id": "id",
+      "section": "3.5",
+      "name": "TOKEN_ID",
+      "start": "q28",
+      "finals": [
+        "q33"
+      ],
+      "regex": "ID_INICIO · ID_CONT*",
+      "edges": [
+        {
+          "from_state": "q28",
+          "to_state": "q29",
+          "symbol": "ID_INICIO"
+        },
+        {
+          "from_state": "q29",
+          "to_state": "q32",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q32",
+          "to_state": "q33",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q32",
+          "to_state": "q30",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q30",
+          "to_state": "q31",
+          "symbol": "ID_CONT"
+        },
+        {
+          "from_state": "q31",
+          "to_state": "q30",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q31",
+          "to_state": "q33",
+          "symbol": "λ"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "a",
+          "_",
+          "total2",
+          "var",
+          "print"
+        ],
+        "reject": [
+          "",
+          "2total",
+          "é",
+          "a-"
+        ]
+      },
+      "explanation": "ID_INICIO obligatorio; repetición cero o más de ID_CONT; una reservada también pertenece al lenguaje ID aislado."
+    },
+    {
+      "id": "float",
+      "section": "3.6",
+      "name": "TOKEN_FLOAT",
+      "start": "q36",
+      "finals": [
+        "q43"
+      ],
+      "regex": "DÍGITO+ · . · DÍGITO+",
+      "edges": [
+        {
+          "from_state": "q36",
+          "to_state": "q34",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q34",
+          "to_state": "q35",
+          "symbol": "DÍGITO"
+        },
+        {
+          "from_state": "q35",
+          "to_state": "q34",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q35",
+          "to_state": "q37",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q37",
+          "to_state": "q38",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q38",
+          "to_state": "q39",
+          "symbol": "."
+        },
+        {
+          "from_state": "q39",
+          "to_state": "q42",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q42",
+          "to_state": "q40",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q40",
+          "to_state": "q41",
+          "symbol": "DÍGITO"
+        },
+        {
+          "from_state": "q41",
+          "to_state": "q40",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q41",
+          "to_state": "q43",
+          "symbol": "λ"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "0.5",
+          "3.1416",
+          "12.0"
+        ],
+        "reject": [
+          "12.",
+          "0",
+          " .5",
+          "12.3.4"
+        ]
+      },
+      "explanation": "Exige >=1 dígito antes y después del punto."
+    },
+    {
+      "id": "int",
+      "section": "3.7",
+      "name": "TOKEN_INT",
+      "start": "q46",
+      "finals": [
+        "q47"
+      ],
+      "regex": "DÍGITO+",
+      "edges": [
+        {
+          "from_state": "q46",
+          "to_state": "q44",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q44",
+          "to_state": "q45",
+          "symbol": "DÍGITO"
+        },
+        {
+          "from_state": "q45",
+          "to_state": "q44",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q45",
+          "to_state": "q47",
+          "symbol": "λ"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "0",
+          "2026",
+          "007"
+        ],
+        "reject": [
+          "",
+          "3.5",
+          "A",
+          "-5"
+        ]
+      },
+      "explanation": "Una o más repeticiones obligatorias de DÍGITO."
+    },
+    {
+      "id": "string",
+      "section": "3.8",
+      "name": "TOKEN_STRING",
+      "start": "q48",
+      "finals": [
+        "q55"
+      ],
+      "regex": "COMILLA · CUERPO_CADENA* · COMILLA",
+      "edges": [
+        {
+          "from_state": "q48",
+          "to_state": "q49",
+          "symbol": "COMILLA"
+        },
+        {
+          "from_state": "q49",
+          "to_state": "q52",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q52",
+          "to_state": "q53",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q52",
+          "to_state": "q50",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q50",
+          "to_state": "q51",
+          "symbol": "CUERPO_CADENA"
+        },
+        {
+          "from_state": "q51",
+          "to_state": "q50",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q51",
+          "to_state": "q53",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q53",
+          "to_state": "q54",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q54",
+          "to_state": "q55",
+          "symbol": "COMILLA"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "\"\"",
+          "\"Hola\"",
+          "\"a b\""
+        ],
+        "reject": [
+          "\"",
+          "\"sin cierre",
+          "\"a\nb\"",
+          "\"mañana\""
+        ]
+      },
+      "explanation": "Extensión pendiente de autorización docente. CUERPO_CADENA dentro del Σ ASCII definido: ASCII imprimible excepto comillas, CR, LF; se permite TAB. No interpreta escapes."
+    },
+    {
+      "id": "comment",
+      "section": "3.9",
+      "name": "TOKEN_COMMENT",
+      "start": "q56",
+      "finals": [
+        "q63"
+      ],
+      "regex": "/ · / · CUERPO_COMENTARIO*",
+      "edges": [
+        {
+          "from_state": "q56",
+          "to_state": "q57",
+          "symbol": "/"
+        },
+        {
+          "from_state": "q57",
+          "to_state": "q58",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q58",
+          "to_state": "q59",
+          "symbol": "/"
+        },
+        {
+          "from_state": "q59",
+          "to_state": "q62",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q62",
+          "to_state": "q63",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q62",
+          "to_state": "q60",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q60",
+          "to_state": "q61",
+          "symbol": "CUERPO_COMENTARIO"
+        },
+        {
+          "from_state": "q61",
+          "to_state": "q60",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q61",
+          "to_state": "q63",
+          "symbol": "λ"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "//",
+          "// hola",
+          "// texto 123"
+        ],
+        "reject": [
+          "/",
+          "//hola\n",
+          "//mañana"
+        ]
+      },
+      "explanation": "Comentario de línea; LF y CR no son parte del lexema; cuerpo limitado a ASCII imprimible + TAB."
+    },
+    {
+      "id": "op",
+      "section": "3.10",
+      "name": "TOKEN_OP",
+      "start": "q64",
+      "finals": [
+        "q65"
+      ],
+      "regex": "\"+\" | \"-\" | \"*\" | \"/\" | \"=\"",
+      "edges": [
+        {
+          "from_state": "q64",
+          "to_state": "q65",
+          "symbol": "OPERADOR"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "+",
+          "-",
+          "*",
+          "/",
+          "="
+        ],
+        "reject": [
+          "++",
+          "//",
+          "(",
+          ":"
+        ]
+      },
+      "explanation": "Clase compacta; mostrar separadamente expansión auxiliar de Thompson por unión con estados pedagógicos adicionales."
+    },
+    {
+      "id": "delim",
+      "section": "3.11",
+      "name": "TOKEN_DELIM",
+      "start": "q66",
+      "finals": [
+        "q67"
+      ],
+      "regex": "\"(\" | \")\" | \";\" | \"{\" | \"}\"",
+      "edges": [
+        {
+          "from_state": "q66",
+          "to_state": "q67",
+          "symbol": "DELIMITADOR"
+        }
+      ],
+      "examples": {
+        "accept": [
+          "(",
+          ")",
+          ";",
+          "{",
+          "}"
+        ],
+        "reject": [
+          "[",
+          ":",
+          "()"
+        ]
+      },
+      "explanation": "Clase compacta; mostrar por separado expansión auxiliar de Thompson por unión, sin cambiar q66–q67."
+    },
+    {
+      "id": "whitespace",
+      "section": "3.12",
+      "name": "TOKEN_WHITESPACE",
+      "start": "q70",
+      "finals": [
+        "q71"
+      ],
+      "regex": "BLANCO+",
+      "edges": [
+        {
+          "from_state": "q70",
+          "to_state": "q68",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q68",
+          "to_state": "q69",
+          "symbol": "BLANCO"
+        },
+        {
+          "from_state": "q69",
+          "to_state": "q68",
+          "symbol": "λ"
+        },
+        {
+          "from_state": "q69",
+          "to_state": "q71",
+          "symbol": "λ"
+        }
+      ],
+      "examples": {
+        "accept": [
+          " ",
+          "\t",
+          "\r\n",
+          "  \t"
+        ],
+        "reject": [
+          "",
+          "a",
+          "x y"
+        ]
+      },
+      "explanation": "Uno o más caracteres en {ESPACIO,TAB,CR,LF}; token de omisión (Skip)."
+    }
+  ],
+  "unification": {
+    "start": "q72",
+    "epsilon_to": [
+      "q0",
+      "q6",
+      "q16",
+      "q20",
+      "q28",
+      "q36",
+      "q46",
+      "q48",
+      "q56",
+      "q64",
+      "q66",
+      "q70"
+    ],
+    "note": "Vista opcional: conectar por λ con cada inicio de los 12 componentes; la λ-cerradura puede incorporar estados internos adicionales."
+  }
+}
